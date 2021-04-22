@@ -12,16 +12,17 @@ class Metric(Marshallable, Cacheable):
     def __init__(self, E):
         # move this to the highest subclass
         self.init_params = util.init_params_from_locals(locals())
-
+        print('creating a new metric')
         self.E = E
         self.X = self.E.X
         self.X_hat = None
         self.W = self.E.W
 
     def compute(self, update_payload=False):
-        self.E = self.maybe(self.E, self.E.hash, 'run')
+        # print('in the compute func of metric')
+        self.E = self.maybe(self.E, self.E.hash, 'run') # this func calculates X_hat which is used
+        # print('after maybe called in compute of metric')       
         self.X_hat = self.E.X_hat
-       
         return self
 
     def asDict(self):
@@ -53,10 +54,15 @@ class SampleError(Metric):
     """
     def compute(self, update_payload=False):
         super(SampleError, self).compute(update_payload)
-
+        # print('this is the important computing function')
         scale = self.X.scale
-        true_ans = self.W.evaluate(self.X.payload)
-        est_ans = self.W.evaluate(self.X_hat)
+        # print('calculating the real answer-------')
+        true_ans = self.W.evaluate(self.X.payload) # dot prod with some const matrix
+        # print('true answer:', true_ans)
+        # print('calculating the estimated answer------')
+        est_ans = self.W.evaluate(self.X_hat) # dot prod with some const matrix
+        # x_hat is array of answers to all the range queries 
+        # print('estimated answer:', est_ans)
         diff = true_ans - est_ans
         self.error_payload = calculate_error('TypeI', diff, scale)
 

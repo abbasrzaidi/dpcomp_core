@@ -9,7 +9,7 @@ from dpcomp_core import dataset
 from dpcomp_core import util
 import unittest
 
-dnames = [ 'ADULT', 'HEPTH', 'INCOME', 'MEDCOST', 'NETTRACE', 'PATENT', 'SEARCHLOGS']
+dnames = ['TEST', 'ADULT', 'HEPTH', 'INCOME', 'MEDCOST', 'NETTRACE', 'PATENT', 'SEARCHLOGS']
 
 class DatasetTests(unittest.TestCase):
 
@@ -58,4 +58,4 @@ class DatasetTests(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main(verbosity=2)   
+    unittest.main(verbosity=10)   

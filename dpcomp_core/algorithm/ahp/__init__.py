@@ -60,7 +60,7 @@ Implementation:     DPComp team
 class ahpND_adaptive_engine(estimate_engine.estimate_engine):
     """Adaptive version assumes true scale known"""
     
-    def __init__(self, index = 'DEFAULT1D', short_name = 'AHP*'):
+    def __init__(self, index = 'DEFALUT1D', short_name = 'AHP*'):
         self.init_params = util.init_params_from_locals(locals())
 
         self._vSEP = Lfunction[index]['vSEP']

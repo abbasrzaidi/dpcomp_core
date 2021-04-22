@@ -178,9 +178,8 @@ Implementation:     DPComp team
 class mwemND_adaptive_engine(estimate_engine.estimate_engine):
     """Adaptive MWEM engine"""
 
-    def __init__(self, index = 'DEFAULT1D',ratio = 0.5, updateround = 100, short_name = 'MWEM*'):
+    def __init__(self, index = 'DEFALUT1D',ratio = 0.5, updateround = 100, short_name = 'MWEM*'):
         self.init_params = util.init_params_from_locals(locals())
-
         self._vSEP = Lfunction[index][0]
         self._vRound = Lfunction[index][1]
         self._updateround = updateround

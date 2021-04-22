@@ -36,7 +36,7 @@ class Cacheable(object):
         else:
             _obj = getattr(obj, method_name)(*args)
             self._cache.set(label, key, _obj)
-
+        print('in here calculating x_hat using', method_name)
         return _obj
 
     def get_if_set(self, obj, key, method_name, args=[]):

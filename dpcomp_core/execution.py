@@ -48,6 +48,7 @@ class ListWriter(object):
 
 def process_experiments(params_map, writer, procs=1):
     for config_hash, params_list in params_map.items():
+        # params list is the experiments its going to be run 
         group_metrics = [cp.run(params) for params in params_list]
 
         writer.write(group_metrics)

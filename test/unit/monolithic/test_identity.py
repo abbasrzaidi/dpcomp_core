@@ -43,7 +43,7 @@ class IdentityTests(unittest.TestCase):
         seed = 1
 
 
-        self.loadD = dataset.DatasetSampledFromFile(nickname='ADULT', sample_to_scale=1000, reduce_to_dom_shape = (32,32),  seed=111)
+        self.loadD = dataset.DatasetSampledFromFile(nickname='TEST', sample_to_scale=1000, reduce_to_dom_shape = (32,32),  seed=111)
         h1 = self.eng.Run(self.w2,self.loadD.payload,self.epsilon,seed)
         h2 = self.eng.Run(self.w2,self.loadD.payload,self.epsilon,seed)
         self.assertSequenceEqual(list(h1),list(h2))

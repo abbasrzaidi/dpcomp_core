@@ -30,7 +30,7 @@ void Utilities::tokenize(const string& str,vector<double>& tokens,const string& 
 
 void Utilities::readFile(const string file_name, vector<double>& histogram){
 	ifstream in(file_name.c_str(), ios_base::in);
-	if(in == NULL){
+	if(!in){ // changed to !in from in == NULL to get it to compile
 		cout << "Error:open data file error.\n";
 		getchar();
 		exit(0);        

@@ -30,6 +30,8 @@ filenameDict = {
     "LC-DTIR-F1"    : '1D/RejectStats_4_4096_no_outliers_filter_7_1.npy',
     "LC-DTIR-F2"    : '1D/RejectStats_4_4096_no_outliers_filter_7_2.npy',
     "LC-DTIR-ALL"   : '1D/RejectStats_4_4096_no_outliers.npy',
+    "UPC_DATA_1" : '1D/UPC_1604045746.npy',
+    'UPC_DATA_2' : '1D/building_counts.npy',
 
     # 2D data with domain 256 by 256
     "SF-CABS-E"         : '2D/cabspottingE_256_256.npy',
@@ -53,6 +55,7 @@ class Dataset(Marshallable):
             Any instances with equal key() values should have equal hash() values
             domain_shape will be result of regular grid partition
         """
+        # print('in super constructor')
         if isinstance(reduce_to_domain_shape, int): # allow for integers in 1D, instead of shape tuples
             reduce_to_domain_shape = (reduce_to_domain_shape, )
 
@@ -185,7 +188,9 @@ class DatasetSampledFromFile(DatasetSampled):
         self.fname = nickname
         assert nickname in filenameDict, 'Filename parameter not recognized: %s' % nickname
         hist = load(filenameDict[self.fname])
+        # print(hist)
         dist = util.old_div(hist, float(hist.sum()))
+        # at this point we disregard the actual values and just use the distribution
         super(DatasetSampledFromFile,self).__init__(dist, sample_to_scale, reduce_to_dom_shape, seed)
 
 
@@ -210,7 +215,7 @@ def load(filename):
                 x.append(int(ln))
         return numpy.array(x, dtype='int32')
     elif file_extension == '.npy':
-        return numpy.load(fullpath)
+        return numpy.load(fullpath, allow_pickle=True)
     else:
         raise Exception('Unrecognized file extension')
 

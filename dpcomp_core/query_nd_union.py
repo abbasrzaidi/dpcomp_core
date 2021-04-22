@@ -80,7 +80,11 @@ class ndRangeUnion(object):
     def eval(self, x):
         ''' Evaluate self on input data x '''
         self._validateShape(x.shape)
-        return sum( [r.wgt * x[ndRangeUnion.slice(r)].sum() for r in self.ranges] )     # sum the results of the individual ranges
+        # print('evaluating a query:')
+        # print(sum( [r.wgt * x[tuple(ndRangeUnion.slice(r))].sum() for r in self.ranges] ))
+        # print('value end')
+        return sum( [r.wgt * x[tuple(ndRangeUnion.slice(r))].sum() for r in self.ranges] )     # sum the results of the individual ranges
+            # placed index access into tuple to get rid of error message
 
     def asArray(self, shape=None):
         ''' Return ndarray representing query
@@ -92,7 +96,7 @@ class ndRangeUnion(object):
             shape = self.impliedShape
         array = numpy.zeros(shape)
         for r in self.ranges:
-            array[ndRangeUnion.slice(r)] += r.wgt
+            array[tuple(ndRangeUnion.slice(r))] += r.wgt  # placed index access into tuple to get rid of error message
         return array
 
     def sens(self):

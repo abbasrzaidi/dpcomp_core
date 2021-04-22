@@ -23,5 +23,4 @@ class identity_engine(estimate_engine.estimate_engine):
         assert seed is not None, 'seed must be set'
 
         prng = numpy.random.RandomState(seed)
-
         return x + prng.laplace(0.0, util.old_div(1.0, epsilon), x.shape)
