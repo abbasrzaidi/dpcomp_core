@@ -1,9 +1,7 @@
-from __future__ import division
-from __future__ import absolute_import
-from builtins import range
-from . import h_tree
 import math
 import numpy as np
+
+from . import h_tree
 from dpcomp_core import util 
 from . import estimate_engine
 
@@ -33,33 +31,8 @@ class HB_engine(estimate_engine.estimate_engine):
 
         N = len(x)
         b = find_best_branching(N)
-        return np.array(build_tree(x, epsilon,prng, b))
-
-'''
-Canonical name:     H (1D)
-Additional aliases: Hierarchical
-Reference:          [M. Hay,V. Rastogi,G. Miklau,and D. Suciu. Boosting the accuracy of differentially private histograms through consistency. PVLDB, 2010.](http://dl.acm.org/citation.cfm?id=1920970)
-Invocation:         dpcomp_core.algorithm.HB.H2_engine()
-Implementation:     DPComp team
-'''
-class H2_engine(estimate_engine.estimate_engine):
-    '''
-    Use hierarchical strategy from Hay PVLDB 2010 using 
-    branching factor of 2.
-    '''
-
-    def __init__(self,short_name="hierarchical_complete"):
-        self.init_params = util.init_params_from_locals(locals())
-        self.short_name = short_name
-
-    
-    def Run(self, Q, x, epsilon, seed):
-        assert seed is not None, 'seed must be set'
-
-        prng = np.random.RandomState(seed)
-
-        return np.array(build_tree(x, epsilon,prng))
-
+        values = np.array(build_tree(x, epsilon,prng, b))
+        return values
 
 '''
 Technique from Qardaji et al. PVLDB 2013.
@@ -103,5 +76,26 @@ def build_tree(x, epsilon,prng, b=2):
     est_x = H.inference()
     return est_x[:n]  # truncate any padded zeros
 
+'''
+Canonical name:     H (1D)
+Additional aliases: Hierarchical
+Reference:          [M. Hay,V. Rastogi,G. Miklau,and D. Suciu. Boosting the accuracy of differentially private histograms through consistency. PVLDB, 2010.](http://dl.acm.org/citation.cfm?id=1920970)
+Invocation:         dpcomp_core.algorithm.HB.H2_engine()
+Implementation:     DPComp team
+'''
+class H2_engine(estimate_engine.estimate_engine):
+    '''
+    Use hierarchical strategy from Hay PVLDB 2010 using 
+    branching factor of 2.
+    '''
 
+    def __init__(self,short_name="hierarchical_complete"):
+        self.init_params = util.init_params_from_locals(locals())
+        self.short_name = short_name
 
+    
+    def Run(self, Q, x, epsilon, seed):
+        assert seed is not None, 'seed must be set'
+
+        prng = np.random.RandomState(seed)
+        return np.array(build_tree(x, epsilon,prng))

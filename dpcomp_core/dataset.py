@@ -33,6 +33,10 @@ filenameDict = {
     "UPC_DATA_1" : '1D/UPC_1604045746.npy',
     'UPC_DATA_2' : '1D/building_counts.npy',
 
+    'time_0' : '1D/time_0_splits.npy',
+    'time_1' : '1D/time_1_splits.npy',
+    'time_2' : '1D/time_2_splits.npy',
+
     # 2D data with domain 256 by 256
     "SF-CABS-E"         : '2D/cabspottingE_256_256.npy',
     "SF-CABS-S"         : '2D/cabspottingS_256_256.npy',

@@ -12,7 +12,6 @@ class Metric(Marshallable, Cacheable):
     def __init__(self, E):
         # move this to the highest subclass
         self.init_params = util.init_params_from_locals(locals())
-        print('creating a new metric')
         self.E = E
         self.X = self.E.X
         self.X_hat = None

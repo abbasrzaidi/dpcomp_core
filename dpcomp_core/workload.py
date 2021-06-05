@@ -64,6 +64,10 @@ class Workload(Marshallable):
         return float(numpy.linalg.norm(self.matrix, 1))   # implemented in numpy as 1-norm of matrix
 
     def evaluate(self, x):
+        # for i in range(len(self.matrix)):
+        #     for j in range(len(self.matrix[i])):
+        #         if (self.matrix[i][j] != 0): print(self.matrix[i][j], end='')
+        #     print('\n')
         return numpy.dot(self.matrix, x.ravel())
 
     @property

@@ -1,7 +1,3 @@
-from __future__ import division
-from __future__ import absolute_import
-from builtins import range
-from dpcomp_core.algorithm import estimate_engine
 from .partition_engines import l1partition
 from .routine_engines import routine_engine
 from dpcomp_core.mixins import Marshallable
@@ -36,8 +32,8 @@ class dawa_engine(routine_engine.transform_engine_qtqmatrix, Marshallable):
     def Run(self, Q, x, epsilon, seed):
 
         assert seed is not None, 'seed must be set'
-
-        return super(type(self),self).Run(Q, x, epsilon, seed)
+        values = super(type(self),self).Run(Q, x, epsilon, seed)
+        return values 
 
 '''
 Canonical name:     DAWA (2D)
